@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Converter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@400;600;700&family=League+Gothic&family=Saira+Condensed:wght@100;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="app">
+
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid justify-content-center">
+                <a class="navbar-brand" href="#"><img src="https://mapshoreconsultants.com/assets/img/logomapshore.png" class="img-fluid" alt=""></a>
+            </div>
+        </nav>
+
+        <div class="container-fluid !direction !spacing">
+            <div class="row">
+                <div class="col-lg-6"></div>
+                <div class="col-lg-6 text-right px-4">
+                    <button class="btn btn-outline-success font-weight-bold text-light" v-on:click="downloadExcel ()" role="button">Generate Excel Sheet</button>
+                </div>
+                <div class="col-lg-4">
+                    <form class="row g-3 needs-validation">
+                      <div class="col-md-4">
+                        <label for="validationCustom01" class="form-label">First name</label>
+                        <input v-model="formData['First-Name']" type="text" class="form-control" id="validationCustom01" required>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Last name</label>
+                        <input v-model="formData['Last-Name']" type="text" class="form-control" id="validationCustom02" required>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustomUsername" class="form-label">Username</label>
+                        <div class="input-group">
+                          <input v-model="formData['Father-Name']" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                          <div class="invalid-feedback">
+                            Please choose a username.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom03" class="form-label">City</label>
+                        <input v-model="formData['Other-Name']" type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom04" class="form-label">State</label>
+                        <select v-model="formData['State']" class="form-select" id="validationCustom04" required>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="kerela">Kerela</option>
+                          <option value="kerela1">Kerela1</option>
+                          <option value="kerela2">Kerela2</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select a valid state.
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button class="btn btn-primary font-weight-bold" :disabled="validateInputs()" v-on:click="addDataTable">Submit form</button>
+                      </div>
+                    </form>
+                </div>
+                <div class="col-lg-8">
+
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th v-for="item in head" scope="col">{{item}}</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody v-for="item in jsonData">
+                          <tr>
+                            <th scope="row">{{item['Index']}}</th>
+                            <td>{{item['First-Name']}}</td>
+                            <td>{{item['Last-Name']}}</td>
+                            <td>{{item['Father-Name']}}</td>
+                            <td>{{item['Other-Name']}}</td>
+                            <td>{{item['State']}}</td>
+                            <td><button class="btn btn-danger btn-sm" v-on:click="deleteTableRow(item['Index'])" role="button">Delete </button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/vue@3"></script>
+        <script src="./dist/main.js"></script>
+</body>
+</html>

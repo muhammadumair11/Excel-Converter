@@ -1,0 +1,55 @@
+body {
+    font-family: 'Abril Fatface', cursive;
+font-family: 'Inter', sans-serif;
+font-family: 'League Gothic', sans-serif;
+font-family: 'Saira Condensed', sans-serif;
+
+background: linear-gradient(90deg, rgba(0,18,255,1) 0%, rgba(214,0,255,1) 100%);
+background-size: 400%;
+
+animation: bg-color 5s ease-in-out alternate infinite;
+}
+
+@keyframes bg-color {
+    to {
+        background-position: left;
+    }
+    from {
+        background-position: right;
+    }
+}
+
+.navbar-brand {
+    background-color: white;
+    padding: 1.5rem;
+
+    border-radius: 20px;
+}
+
+label {
+    color: white;
+    font-weight: bold;
+}
+
+.col-lg-8 {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #fff;
+}
+::-webkit-scrollbar-track {
+    width: 5px;
+    background-color: #aaa;
+}
+
+table {
+    color : white !important;
+
+    transition: all 500ms ease-in-out;
+
+}
