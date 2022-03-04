@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Converter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@400;600;700&family=League+Gothic&family=Saira+Condensed:wght@100;400;500&display=swap" rel="stylesheet">
+
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body id="app">
+
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid justify-content-center">
+                <a class="navbar-brand" href="#"><img src="https://mapshoreconsultants.com/assets/img/logomapshore.png" class="img-fluid" alt=""></a>
+            </div>
+        </nav>
+
+        <div class="container-fluid !direction !spacing">
+            <div class="row">
+                
+                <div class="col-lg-4">
+                    <form class="row g-3 needs-validation">
+                      <div class="col-md-6">
+                        <label for="validationCustom01" class="form-label">Name</label>
+                        <input v-model="formData.Name" type="text" class="form-control" id="validationCustom01" required>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="validationCustom02" class="form-label">Mobile</label>
+                        <input v-model="formData.Mobile" type="text" class="form-control" id="validationCustom02" required>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <label for="validationCustomUsername" class="form-label">Email</label>
+                        <div class="input-group">
+                          <input v-model="formData.Email" type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                          <div class="invalid-feedback">
+                            Please choose a username.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom04" class="form-label">State</label>
+                        <select v-model="formData['State']" class="form-select" id="validationCustom04" required>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="kerela">Kerela</option>
+                          <option value="kerela1">Kerela1</option>
+                          <option value="kerela2">Kerela2</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select a valid state.
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom03" class="form-label">Place</label>
+                        <input v-model="formData.Place" type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom03" class="form-label">Details</label>
+                        <input v-model="formData.Details" type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom03" class="form-label">Current CTC</label>
+                        <input v-model="formData.Current_CTC" type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom03" class="form-label">Expected CTC</label>
+                        <input v-model="formData.Expected_CTC" type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom03" class="form-label">Comments CTC</label>
+                        <input v-model="formData.Comments" type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationCustom03" class="form-label">Remarks CTC</label>
+                        <input v-model="formData.Remarks" type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      
+
+                      <div class="col-12">
+                        <button class="btn btn-primary font-weight-bold" :disabled="validateInputs()" v-on:click="addDataTable">Submit form</button>
+                      </div>
+                    </form>
+                </div>
+                <div class="col-lg-8">
+                  <div class="d-flex justify-content-between py-3 my-4">
+                    <div class="display-4 text-light font-weight-bold">Client Data</div>
+                    <button class="btn btn-outline-success font-weight-bold text-light" v-on:click="downloadExcel()" role="button">Generate Excel Sheet</button>
+
+                  </div>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th v-for="item in head" scope="col">{{item}}</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody v-for="(item, index) in jsonData">
+                          <tr v-if="index == 0">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                              <td></td>
+                          </tr>
+                          <tr v-else>
+                            <th scope="row">{{item.SI_NO}}</th>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Mobile}}</td>
+                            <td>{{item.Email}}</td>
+                            <td>{{item.State}}</td>
+                            <td>{{item.Place}}</td>
+                            <td>{{item.Details}}</td>
+                            <td>{{item.Current_CTC}}</td>
+                            <td>{{item.Expected_CTC}}</td>
+                            <td>{{item.Comments}}</td>
+                            <td>{{item.Remarks}}</td>
+                            <td><button class="btn btn-danger btn-sm" v-on:click="deleteTableRow(item.SI_NO)" role="button">Delete </button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://unpkg.com/vue@3"></script>
+        <script src="./index.js"></script>
+</body>
+</html>
